@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="board/fragments/header :: main-head"> </head>
+	<body th:replace="board/fragments/body :: main-body"> </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="TemplateMo">
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
+
+<title>Ourd Business - Services</title>
+
+<!-- Bootstrap core CSS -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="../assets/css/reply.css">
+<link rel="stylesheet" href="../assets/css/fontawesome.css">
+<link rel="stylesheet" href="../assets/css/templatemo-finance-business.css">
+<link rel="stylesheet" href="../assets/css/owl.css">
+<link rel="stylesheet" href="../assets/css/view.css">
+<!--
+
+Finance Business TemplateMo
+
+https://templatemo.com/tm-545-finance-business
+
+-->
+</head>
+
+<body>
+
+	<!-- ***** Preloader Start ***** -->
+	<div id="preloader">
+		<div class="jumper">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<!-- ***** Preloader End ***** -->
+
+	  <!-- Header -->
+
+    
+     <header class="">
+      <nav class="navbar navbar-expand-lg">
+         <div class="container">
+            <a class="navbar-brand" href="/home"><h2>OURD
+                  Business</h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+               data-target="#navbarResponsive" aria-controls="navbarResponsive"
+               aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active"><a class="nav-link" href="/home">Home
+                        <span class="sr-only">(current)</span>
+                  </a></li>
+                  <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link"
+                   th:href="@{login}">Sign Up</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/board/list.do">Board
+                        </a></li>
+                     <li class="nav-item"><a class="nav-link" href="/chat/room" 
+                  onclick="window.open(this.href, '_blank', 'width=460px,height=420px,left=2000%, top=500px,toolbars=no,scrollbars=no'); return false;">
+                        Chat</a></li>
+                    
+                  <li class="nav-item"><a class="nav-link" href="/home" sec:authorize="isAuthenticated()" sec:authentication="name"></a></li>
+                    <form class="nav-item" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
+                  <li class="nav-item"><a class="nav-link" href="board" th:href="@{'/logout'}">
+                        <button class="btn btn-outline-success" type="submit">logout</button></a></li>
+                  </form>
+               </ul>
+            </div>
+         </div>
+      </nav>
+   </header>
+
+	<!-- Page Content -->
+	<div class="page-heading header-text">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>>CAREER BOARD</h1>
+					<span>WITH. OURD</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="back1">
+    
+<br><br>
+
+<div class="title1">기본 사항</div>
+	<div class="cheese">
+		<p th:if="${nickname != null}"><a href="javascript:;" id="kakao-link-btn" class="btn btn-warning waves-effect waves-light" >공유하기</a> </p>
+		<!-- <div class="resume_photo">
+            <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo">
+                <span>사진추가</span>            </a>
+            <a class="photo_delete" href="##" style="display:none;"><span class="blind">사진 삭제</span></a>
+        </div> -->
+        <br><br><br><br><br><br><br><br><br><br>
+		<img alt="" src="../img/지도.jpg" id="cheese1"> 
+			<br><br><br><br>
+		   <div class="btn_wrap text-center" th:object="${params}" id="cb">
+            <a th:href="|@{/board/list.do}*{makeQueryString(currentPageNo)}|"
+               class="btn btn-default waves-effect waves-light" id="back">뒤로가기</a>
+            <p th:if="${nickname} == ${board.username}">
+               <a
+                  th:href="|@{/board/modify.do}*{makeQueryString(currentPageNo)}&idx=${board.idx}|"
+                  class="btn btn-primary waves-effect waves-light" id="modify">수정하기</a>
+            </p>
+            <p th:if="${nickname != null}"></p>
+
+            <p th:if="${nickname} == ${board.username}"><button type="button"
+                  class="btn btn-danger waves-effect waves-light"
+                  th:onclick="deleteBoard([[ ${board.idx} ]], [[ *{makeQueryString(currentPageNo)} ]])" id="delete">삭제하기</button>
+            </p>
+            <p th:if="${nickname != null}"></p>
+   </div>
+	</div>
+<br>
+
+
+
+	<th:block layout:fragment="title">
+		<title>this is view page</title>
+	</th:block>
+
+	<th:block layout:fragment="modal">
+		<div id="commentModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                <form>
+		                    <div class="form-group">
+		                        <label for="modalWriter" class="col-form-label">작성자</label>
+		                        <input type="text" id="modalWriter" class="form-control" placeholder="작성자를 입력해 주세요." />
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="modalContent" class="col-form-label">내용</label>
+		                        <input type="text" id="modalContent" class="form-control" placeholder="내용을 입력해 주세요."></input>
+		                    </div>
+		                </form>
+		            </div>
+<!-- 		            <div class="modal-footer">
+		                <button type="button" id="btnModalCancel" class="btn btn-default waves-effect waves-light" data-dismiss="modal">취소하기</button>
+		                <button type="button" id="btnCommentUpdate" class="btn btn-primary waves-effect waves-light" onclick="updateComment()" >수정하기</button>
+		                <button type="button" id="btnCommentDelete" class="btn btn-danger waves-effect waves-light">삭제하기</button>
+		            </div> -->
+		        </div>
+		    </div>
+		</div>
+	</th:block>
+
+	<th:block layout:fragment="content">
+		<div class="card-content">
+			<form class="form-horizontal form-view" th:object="${board}">
+			
+				<div class="form-group">
+					<label for="inp-type-1" class="col-sm-2 control-label" id="l1">제목</label>
+					<div class="col-sm-5" id="l2">
+						<p class="form-control" th:text="*{title}" id="l2"></p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inp-type-2" class="col-sm-2 control-label" id="l1">내용</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{content}" id="l3"></p>
+					</div>
+				</div>							
+				
+				<div class="form-group">
+					<label for="inp-type-2" class="col-sm-2 control-label" id="l1">이름</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{writer}" id="l4"></p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label" id="l1">생년월일</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{birthday}" id="l4"></p>
+					</div>
+				</div>
+			
+ 			<!-- 이메일 칸 -->	
+		     	<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label" id="l1">이메일</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{email}" id="l5"></p>
+					</div>
+				</div>
+				
+				<div class="resume_photo">
+            <a th:each="row, status : ${fileList}" href="##"  data-api_type="layer" data-api_id="basic_photo">
+                <img id="profile_img" th:src="@{/images/} +  ${row.saveName}">
+                   </a>
+            <a class="photo_delete" href="##" style="display:none;"><span class="blind">사진 삭제</span></a>
+        </div>
+			
+        
+			<div class="gr">학력 사항</div><br>			
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label" id="l1">고등학교</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{grade}" id="l6"></p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label" id="l1">대학교</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{gradeup}" id="l6"></p>					
+					</div>
+				</div>
+
+		<div class="im">핵심 역량</div>
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label" id="l1">스킬</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{skills}" id="l7"></p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inp-type-5" class="col-sm-2 control-label" id="l1">깃허브</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{git}" id="l7"></p>					
+					</div>
+				</div> 
+			</div>
+
+
+				<div th:if="${not #lists.isEmpty( fileList )}" class="form-group" >
+					<label for="inp-type-4" class="col-sm-2 control-label" id="l1">File</label>
+					<div class="col-sm-10">
+						<div class="form-control file_list" id="file">
+							<a th:each="row, status : ${fileList}" th:href="@{/board/download.do( idx=${row.idx} )}">
+								<i class="fa fa-file-o" aria-hidden="true"></i>
+								[[ ${row.originalName} ]]
+							</a>
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			
+
+
+	<br /><br /><br /><br /><br /><br /><br />
+
+<br><br><br><br><br><br><br><br><br>
+		
+		
+
+	 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	
+				<script type="text/javascript">
+
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('626b47d99a7f1c79bb6dbc40b7e7a847');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: document.title,
+        description: '멋진 포트폴리오를 확인해보세요!',
+        imageUrl: document.images[0].src,
+        link: {
+          webUrl: document.location.href,
+          mobileWebUrl: document.location.href
+        }
+      },
+      buttons: [
+        {
+          title: '보러가기',
+          link: {
+            mobileWebUrl: document.location.href,
+            webUrl: document.location.href
+          }
+        }  
+      ]
+    });
+
+  //]]>
+</script>
+		
+		<script type="text/javascript">
+
+function printPage(){
+	
+ var initBody;
+ window.onbeforeprint = function(){
+  initBody = document.body.innerHTML;
+  document.body.innerHTML =  document.getElementById('print').innerHTML;
+ };
+ window.onafterprint = function(){
+  document.body.innerHTML = initBody;
+ };
+ window.print();
+ return false;
+}
+
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".comment_info_button").click(showReplyWriteForm);
+    
+});
+
+
+function reReply() {	   
+	  
+	  var data=$("#content").val().trim();
+	    var data1=$("#parent").val();
+	    var data2=$("#boardId").val();
+	    console.log(data2)
+	    var data3=$("#nickname").val();
+	    var data4=$("#parentWriter").val();
+	    console.log(data);
+	    if(data == null || data == ""){
+  	    	alert("댓글 내용을 입력해주세요!");
+  	    }else{
+	    var reply={
+	    		content:data,
+	    		parent:data1,
+	    		boardId:data2,
+	    		nickname:data3,
+	    		parentWriter:data4
+	    };
+	    console.log(reply);
+	    
+	    $.ajax({url:"/board/replyWrite",
+    data: reply,
+    type:"POST"
+    
+	}) .done(function (fragment) {
+
+		 hi(data2);   
+	
+	    });
+	    console.log("알림 클릭");
+	 	  let title = "[알림]댓글이달렸습니다"
+	 	  let options = {
+	 		body: '댓글을 확인해주세요.',
+	 		data:{propl:1234, prop2:"장유빈"}
+	 	  }
+	 	  let n = new Notification(title, options);
+	 	  
+	 	  n.addEventListener('show', function(ev){
+	 		 console.log('SHOW', ev.currentTarget.data); 
+	 	  });
+	 	  n.addEventListener('close', function(ev){
+	 		  console.log('COLSE', ev.currentTarget.body); 
+	 	  });
+	 	  setTimeout(n.close.bind(n), 4000);
+	    
+	    
+	}
+  
+}
+
+
+ 
+/*  function reReply() {	   
+	  
+ 	  var data=$("#content").val();
+ 	    var data1=$("#parent").val();
+ 	    var data2=$("#boardId").val();
+ 	    var data3=$("#nickname").val();
+ 	    var data4=$("#parentWriter").val();
+ 	    console.log(data);
+ 	    var reply={
+ 	    		content:data,
+ 	    		parent:data1,
+ 	    		boardId:data2,
+ 	    		nickname:data3,
+ 	    		parentWriter:data4
+ 	    };
+ 	    console.log(reply);
+ 	    
+ 	    $.ajax({url:"/board/replyWrite",
+     data: reply,
+     type:"POST"
+     
+ 	}) .done(function (fragment) {
+         alert("대댓글성공")
+         window.location.reload()
+ 	    });
+ 	    
+ 	   console.log("알림 클릭");
+ 	  let title = "[알림]댓글이달렸습니다"
+ 	  let options = {
+ 		body: '댓글을 확인해주세요.',
+ 		data:{propl:1234, prop2:"장유빈"}
+ 	  }
+ 	  let n = new Notification(title, options);
+ 	  
+ 	  n.addEventListener('show', function(ev){
+ 		 console.log('SHOW', ev.currentTarget.data); 
+ 	  });
+ 	  n.addEventListener('close', function(ev){
+ 		  console.log('COLSE', ev.currentTarget.body); 
+ 	  });
+ 	  setTimeout(n.close.bind(n), 4000);
+ 	}
+    */
+ 
+
+ function showReplyWriteForm() {
+	 	console.log(event.target.id);
+	  	$('.recomment_form').remove();
+	     let targetId = event.target.id.split(' ');
+	     let parent = targetId[0];
+	     let replyId = targetId[1];
+	     let username = targetId[2];
+	     let board = targetId[3];
+	     let nickname = targetId[4];
+	     let recommentForm = ``
+	        
+	         + `<div class="comment_writer recomment_form">`
+
+	         + ` <form name="commentForm"  >`
+	         + ` <textarea class="recomment_write_input" id="content" placeholder="${username}님께 답글쓰기" onkeydown="resize(this)" ></textarea>`
+	         + `<input type="hidden" id="parent"  value="${parent}"/>` 
+	         + `<input type="hidden" id="boardId" value="${board}" />`
+	         + `<input type="hidden" id="parentWriter" value="${username}" />`
+	         + `<input type="hidden" id="nickname" value="${nickname}" />`
+	         + `</form>`
+	         + `<div class="comment_writer_button">`
+	         + `  <button class="button2221" onclick="removeForm()">취소</button>`
+	         + `  <button class="button2221" onclick="reReply()">등록</button>`
+	         + `</div>`
+	         + `</div>`;
+	        
+	   
+	     $('#comment_area'+replyId).append(recommentForm);
+	     $('.recomment_write_input').focus(); 
+	 }
+function removeForm() {
+ $('.recomment_form').remove();
+}
+
+
+function deleteReply(parent,replyId,board, writer) {
+	  var data=replyId;
+	  var data1=parent;
+	  var data2=board;
+	  var data3=writer;
+	  var reply={
+			    replyId:data,
+	    		parent:data1,
+	    		boardId:data2,
+	    		writer:data3
+	    };
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	
+	 	  
+	 	 $.ajax({url:"/board/replyDelete",
+	 	     data: reply,
+	 	     type:"POST"
+	 	     
+	 	 	}) .done(function (fragment) {
+	 
+	 	 		hi(data2);  
+	 	 
+	 	 	    });
+	 	 	}
+
+
+	else{  
+
+	    return;
+
+	}
+	
+
+
+}
+</script> 
+		
+			
+<div id="replyList">
+<div  class="reply_article" th:if="${replyCount} != null" th:text="'comment ('+${replyCount}+')'"></div>
+<div  class="reply_article" th:if="${replyCount} == null" >comment</div>
+<hr width="1075px" color="black">
+ <div  class="comment_box" th:each="replies : ${replies}"  >
+  <ul  class="comment_list">
+   <li   th:style="${replies.replyId == replies.parent ? '' : 'padding-left: 50px;'}" >
+    <div  th:id="'comment_area'+${replies.replyId}"> 
+     <div  class="comment_content">
+
+      <div  class="comment_nick_box"><span  th:text="${replies.username}"></span> </div>
+      <div  class="comment_text_box" th:if="${replies.delete == 2}"><span>삭제된 댓글입니다.</span></div>
+      <div class="comment_text_box" th:if="${replies.parentWriter == null and replies.delete == 1}"><span th:utext="${replies.content}"></span></div>
+      <div class="comment_text_box" th:if="${replies.parentWriter != null and replies.delete == 1}"><span class="comment_nick_box" th:text="${replies.parentWriter}" ></span>&nbsp; <span th:utext="${replies.content}"></span></div>
+      <div class="comment_info_box">
+       <div><span th:text="${ replies.date}"  class="comment_info_date"></span>
+            <span th:id="${replies.parent}+' '+${replies.replyId}+' '+${replies.username}+' '+${board.idx}+' '+${nickname} " class="comment_info_button" th:if="${nickname != null and replies.delete == 1} " >답글</span>
+        </div>
+        <div class="comment_info_delete">
+        <span class="comment_modify_button" th:if="${nickname == replies.username and replies.delete == 1 }"  th:onclick="modifyReply( [[${replies.replyId}]] ,[[${replies.content}]], [[${board.idx}]] )">수정</span>
+        <span class="comment_delete_button" th:if="${nickname == replies.username and replies.delete == 1 }" th:onclick="deleteReply([[${replies.parent}]], [[${replies.replyId}]], [[${board.idx}]] , [[${replies.parentWriter}]] )">삭제</span>
+        </div>
+  
+      
+       </div>
+      
+
+  
+    </div>
+    </div>
+    </li>
+    </ul>
+</div>	
+
+	<div th:if="${nickname} != null" class="comment_writer">
+					<form class="form-horizontal form-view">
+						<textarea class="comment_write_input" id="content" placeholder="댓글을 남겨보세요" onkeydown="resize(this)" ></textarea>
+						<input type="hidden" id="parent"   value="0"/> 
+						<input type="hidden" name="use_html" value="Y" />
+                    <input type="hidden" id="boardId" th:value="${board.idx}" />
+                     <input type="hidden" id="nickname" th:value="${nickname}" />
+						</form>
+						<div class="comment_writer_button">
+						
+							<button  class="button2222" onclick="dataSend()">
+							등록
+							</button>
+								<a href="#" id="requestPermission">알림을 허용하시겠습니까?</a>
+						</div>
+					</div>
+		</div>  
+			
+</div>
+</div>
+ <script type="text/javascript">  
+ function resize(obj) {
+	    obj.style.height = "0px";
+	    obj.style.height = (10+obj.scrollHeight)+"px";
+	}
+
+function replyModify() {	   
+	  
+	  var data=$("#content").val().trim();
+	  var data1=$("#replyId").val();
+	    var data2=$("#boardId").val();
+	    console.log(data);
+	    if(data == null || data == ""){
+  	    	alert("댓글 내용을 입력해주세요!");
+	    }else{
+	    var reply={
+	    		content:data,
+	    		replyId:data1,
+	    		boardId:data2,
+	    };
+	    console.log(reply);
+	    
+	  $.ajax({url:"/board/replyModify",
+  data: reply,
+  type:"POST" 
+  
+	}) .done(function (fragment) {
+		hi(data2); 
+	    }); 
+	}
+
+}
+function modifyReply(replyId, content, board ){
+	let contents = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+	$('.recomment_form').remove();
+ let recommentForm = ``
+     + `<div class="comment_writer recomment_form">`
+     + ` <form  name="commentForm"  >`
+     + ` <textarea class="recomment_write_input1" id="content" value="${content}"  onkeydown="resize(this)" >${contents}</textarea>`
+     + `<input type="hidden" id="replyId"  value="${replyId}"/>` 
+     + `<input type="hidden" id="boardId" value="${board}" />`
+     + `</form>`
+     + `<div class="comment_writer_button">`
+     + `  <button class="button2221" onclick="removeForm()">취소</button>`
+     + `  <button class="button2221" onclick="replyModify()">수정</button>`
+     + `</div>`
+     + `</div>`;
+    
+
+ $('#comment_area'+replyId).append(recommentForm);
+ $('.recomment_write_input').focus();
+}
+
+</script> 
+		
+		
+		
+		
+		<!-- /.card-content -->
+	</th:block>
+
+
+	
+	    <script type="text/javascript">  
+	    
+	    var requestPermission = document.querySelector('#requestPermission')
+	    var showNotification = document.querySelector('#showNotification')
+
+	      // 알림 권한 요청
+	      requestPermission.addEventListener('click', () => {
+	    	  console.log("권한 요청 클릭");
+	        if (Notification.permission === 'granted') {
+	        	showNotification();
+	        	showNotificationa();
+	        } else {
+	          Notification.requestPermission()
+	          .then(function(result){
+	        	  console.log(result)
+	            if (p == 'denied') {
+	              alert('알림을 허용하지 않았습니다.')
+	            } else if (Notification.permission === 'granted') {
+	              alert('알림을 허용했습니다.')
+	              showNotification();
+	              showNotificationa();
+	              }
+	          })
+	          .catch((err)=>{
+	        	  console.log(err);
+	          });
+	        }
+	      })
+	    
+         function hi(boardId) {
+	   	 
+	        var data=boardId;
+	     
+	        var messageDTO={
+	            dto:data
+	        };
+	     
+	        $.ajax({
+	            url: "/board/dataSend",
+	            data: messageDTO,
+	            type:"POST",
+	        }).done(function (fragment) {
+	            $("#replyList").replaceWith(fragment);
+	            $(".comment_info_button").click(showReplyWriteForm);
+	        });
+	    } 
+	    
+	    function dataSend() {	   
+	    	$('.recomment_form').remove();
+	        
+	  	  var data= $("#content").val().trim();
+	  	    var data1=$("#parent").val();
+	  	    var data2=$("#boardId").val();
+	  	    var data3=$("#nickname").val();
+	  	    console.log(data);
+	  	  if(data == null || data == ""){
+	  	    	alert("댓글 내용을 입력해주세요!");
+	  	    }else{
+	  	    var reply={
+	  	    		content:data,
+	  	    		parent:data1,
+	  	    		boardId:data2,
+	  	    		nickname:data3
+	  	    };
+	  	    console.log(reply);
+	  	    
+	  	    $.ajax({url:"/board/replyWrite",
+	      data: reply,
+	      type:"POST"
+	      
+	      
+	      
+	  	}) .done(function (fragment) {
+	  		hi(data2);  
+	  		
+	  		
+	  		console.log("알림 클릭");
+	    	  let title = "[알림]댓글이달렸습니다"
+	    	  let options = {
+	    		body: '댓글을 확인해주세요.',
+	    		data:{propl:1234, prop2:"장유빈"}
+	    	  }
+	    	  let n = new Notification(title, options);
+	    	  
+	    	  n.addEventListener('show', function(ev){
+	    		 console.log('SHOW', ev.currentTarget.data); 
+	    	  });
+	    	  n.addEventListener('close', function(ev){
+	    		  console.log('COLSE', ev.currentTarget.body); 
+	    	  });
+	    	  setTimeout(n.close.bind(n), 4000);
+	           
+	  	    });
+	  	}}
+	    
+      
+      // 알림 표시
+      
+      showNotification.addEventListener('click', () => {
+  	    
+    	  console.log("알림 클릭");
+    	  let title = "[알림]댓글이달렸습니다"
+    	  let options = {
+    		body: '댓글을 확인해주세요.',
+    		data:{propl:1234, prop2:"장유빈"}
+    	  }
+    	  let n = new Notification(title, options);
+    	  
+    	  n.addEventListener('show', function(ev){
+    		 console.log('SHOW', ev.currentTarget.data); 
+    	  });
+    	  n.addEventListener('close', function(ev){
+    		  console.log('COLSE', ev.currentTarget.body); 
+    	  });
+    	  setTimeout(n.close.bind(n), 4000);
+    	  
+      })
+      
+      showNotificationa.addEventListener('click', () => {
+  	    
+    	  console.log("알림 클릭");
+    	  let title = "[알림]댓글이달렸습니다"
+    	  let options = {
+    		body: '댓글을 확인해주세요.',
+    		data:{propl:1234, prop2:"장유빈"}
+    	  }
+    	  let n = new Notification(title, options);
+    	  
+    	  n.addEventListener('show', function(ev){
+    		 console.log('SHOW', ev.currentTarget.data); 
+    	  });
+    	  n.addEventListener('close', function(ev){
+    		  console.log('COLSE', ev.currentTarget.body); 
+    	  });
+    	  setTimeout(n.close.bind(n), 4000);
+    	  
+      })
+
+     
+       
+     
+       </script>  
+	
+
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+
+			function deleteBoard(idx, queryString) {
+
+				if (confirm(idx + "번 게시글을 삭제할까요?")) {
+					var uri = /*[[ @{/board/delete.do} ]]*/;
+					var html = "";
+
+					html += '<form name="dataForm" action="'+uri+'" method="post">';
+					html += '<input type="hidden" name="idx" value="'+idx+'" />';
+
+					/*[- 쿼리 스트링을 오브젝트 형태로 변환 -]*/
+					queryString = new URLSearchParams(queryString);
+					queryString.forEach(function(value, key) {
+						if (isEmpty(value) == false) {
+							html += '<input type="hidden" name="' + key + '" value="' + value + '" />';
+						}
+					});
+
+					html += '</form>';
+
+					$("body").append(html);
+					document.dataForm.submit();
+				}
+			}
+			/*[- end of function -]*/
+
+			/*]]>*/
+		</script>
+	</th:block>
+  <!-- Footer Starts Here -->
+	   <footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 footer-item">
+					<h4>OurD 소개</h4>
+					<p><strong>Our Dream</strong>
+					<br>
+						우리들의 꿈이 이루어지는  <br>
+						그날까지 함께하겠습니다. <br>
+						We will be together until our dreams come true.<br>
+						ABOUT OurD</p>
+				</div>
+				<div class="col-md-3 footer-item">
+					<h4>고객 센터</h4> 
+						<p>
+						(주)Our Dream | 서울 강남구 테헤란로 <br>
+						고객센터 전화문의 | 010-0000-0000 <br>
+						FAX | 02-0000-0000  <br>
+						E-mail ourD@naver.com <br>
+						</p>
+				</div>
+				<div class="col-md-3 footer-item">
+					<h4>Additional Pages</h4>
+					<ul class="menu-list">
+						<li><a href="#">About Us 회사소개 바로가기</a></li>
+						<li><a href="#">포트폴리오 바로가기</a></li>
+						<li><a href="#">팁 게시판 바로가기</a></li>
+						<li><a href="#">채팅방 바로가기</a></li>
+						<li><a href="#">Home 바로가기</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 footer-item last-item">
+					<h4>채팅방 바로가기</h4>
+					<div class="contact-form">
+
+								<div class="col-lg-12">
+								<a href="/chat/room" onclick="window.open(this.href, '_blank', 'width=500px,height=500px,left=2000%, top=500px,toolbars=no,scrollbars=no'); return false;">
+								<!-- 
+									<a href="/chat/room" target='_blank'> -->
+										<fieldset>
+												<button value="채팅방으로이동" type="submit" id="ChatGo" class="filled-button">채팅방 바로가기</button>
+										</fieldset>
+									<!-- </a> -->
+								</a>
+								</div>
+							</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						Copyright &copy; Ourd Corp. All Right Reserved. <a rel="nofollow noopener" href="http://localhost:9091/login" target="_blank"></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/owl.js"></script>
+    <script src="../assets/js/slick.js"></script>
+    <script src="../assets/js/accordions.js"></script>
+
+    <script language = "text/Javascript"> 
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+  </body>
+</html>

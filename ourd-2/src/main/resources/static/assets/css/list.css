@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+#wr {
+	background-color: #a4c639;
+	border-color: #a4c639;
+	width: 70px;
+	height: 30px;
+	font-family: "G마켓 산스";
+	font-size: 13px;
+	padding-top: 7px;
+}
+
+#mainSearchKeyword{
+	height: 40px;
+}
+
+#downb {
+	height: 40px;
+	width: 50px;
+}
+
+#adv-search{
+	width: 500px;
+	margin-left: 36%;
+}
+
+#titlec {
+	color: #a4c639;
+}
+
+
+#sbb {
+	background-color: #a4c639;
+	border-color: #a4c639;
+	width: 50px;
+}
+
+#type {
+	font-size: 15px;
+	font-family: "G마켓 산스";
+	text-align: center;
+}
+
+#tt {
+	text-align: center;
+}
+
+#pb {
+	margin-left: 49%;
+	 
+}
+
+
+#b1 {
+	background-color: #a4c639;
+}
+
+#table {
+	width: 80%;
+	margin-left: 10%;
+}

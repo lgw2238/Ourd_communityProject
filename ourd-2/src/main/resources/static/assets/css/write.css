@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+.title1 {
+	width: 150px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+}
+
+.gr {
+	width: 150px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+	margin-top: 5%;
+}
+
+.im {
+	width: 150px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+	margin-top: 5%;
+}
+
+
+.pf {
+	width: 200px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+	margin-top: 5%;
+}
+
+.resume_photo {
+    position: absolute;
+    margin-left: 60.5%;
+	margin-top: -21%;
+   /* padding: 9px; */
+    width: 120px;
+    height: 160px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+#sb {
+	background-color: #a4c639;
+	border-color: #a4c639;
+	width: 70px;
+	height: 30px;
+	font-size: 13px;
+	font-family: "G마켓 산스";
+	padding-top: 1.1%;
+}
+
+.t3 {
+	margin-left: 20.5%;
+	font-size: 25px;
+	font-family: "G마켓 산스";
+}
+
+#l1 {
+	font-family: "G마켓 산스";
+	font-size: 18px;
+	text-align: right;
+	margin-left: 8.8%;
+	padding-bottom: 5px;	
+}
+
+#l2 {
+	margin-top: 0.2%;
+	width: 70%;
+	height: 35px;
+}
+
+#l3 {
+	margin-top: 1%;
+	width: 70%;
+	height: 162px;
+}
+
+#l4 {
+	margin-top: 1%;
+	width: 25%;
+	height: 30px;
+}
+
+#l5 {
+	margin-top: 1%;
+	width: 40%;
+	height: 30px;
+	
+}
+
+#l6 {
+	margin-top: 1%;
+	width: 60%;
+	height: 30px;
+}
+
+#l7 {
+	margin-top: 1%;
+	width: 60%;
+	height: 30px;
+}
+
+.back1 {
+	background-color: white;
+}
+
+#fi {
+	text-align: left;
+}
+
+#bac {
+	width: 70px;
+	height: 30px;
+	font-size: 13px;
+	font-family: "G마켓 산스";
+	background-color: #e4e7ea;
+	padding: 7px;
+	margin-right: 51.5%;
+}
+
+.cheese {
+	position: absolute;
+	margin-left: 60.5%;
+	margin-top: 2%;
+}
+
+#cheese1 {
+	width: 350px;
+	height: 600px;
+	border-radius: 5px;
+	
+}
+
+.saf {
+	margin-top: 7%;
+	margin-left: 67.5%;
+}
+
+#l15 {
+		font-family: "G마켓 산스";
+	font-size: 18px;
+	text-align: right;
+	margin-left: 8.8%;
+	padding-bottom: 5px;
+}
+
+
+ 
+   #file { display:none; }
+      
+    .resume_photo{
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }       
+    
+    img{
+         width:120px;
+          height:160px;
+          object-fit: cover;
+    }
+
+

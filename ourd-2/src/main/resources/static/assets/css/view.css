@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+.title1 {
+	width: 150px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+}
+
+.gr {
+	width: 150px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+	margin-top: 5%;
+}
+
+.im {
+	width: 150px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+	margin-top: 5%;
+}
+
+
+.pf {
+	width: 200px;
+	height: 25px;
+	background-color: black;
+	font-size: 20px;
+	font-family: "G마켓 산스";
+	text-align: center;
+	margin-left: 20.5%;
+	color: white;
+	margin-top: 5%;
+}
+
+
+.resume_photo {
+    position: absolute;
+    margin-left: 60.5%;
+	margin-top: -21%;
+   /* padding: 9px; */
+    width: 120px;
+    height: 160px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+#sb {
+	background-color: #a4c639;
+	border-color: #a4c639;
+	width: 70px;
+	height: 40px;
+	font-size: 13px;
+	font-family: "G마켓 산스";
+}
+
+/* #btnDiv {
+	margin-left: 1700px;
+} */
+
+.t1 {
+	text-align: center;
+	font-family: "G마켓 산스";
+}
+
+
+.t3 {
+	margin-left: 20.5%;
+	font-size: 25px;
+	font-family: "G마켓 산스";
+}
+
+#l1 {
+	font-family: "G마켓 산스";
+	font-size: 18px;
+	text-align: right;
+	margin-left: 8.8%;
+	padding-bottom: 5px;	
+}
+
+#l2 {
+	margin-top: 0.2%;
+	width: 70%;
+	height: 35px;
+}
+
+#l3 {
+	margin-top: 1%;
+	width: 70%;
+	height: 162px;
+}
+
+#l4 {
+	margin-top: 1%;
+	width: 25%;
+	height: 30px;
+}
+
+#l5 {
+	margin-top: 1%;
+	width: 40%;
+	height: 30px;
+	
+}
+
+#l6 {
+	margin-top: 1%;
+	width: 60%;
+	height: 30px;
+}
+
+#l7 {
+	margin-top: 1%;
+	width: 60%;
+	height: 30px;
+}
+
+
+
+.back1 {
+	background-color: white;
+}
+
+.cheese {
+	position: absolute;
+	margin-left: 60.5%;
+	margin-top: 2%;
+}
+
+#cheese1 {
+	width: 350px;
+	height: 600px;
+	border-radius: 5px;
+	
+}
+
+.saf {
+	margin-top: 7%;
+	margin-left: 67.5%;
+}
+
+
+#file {
+	width: 29.5%;
+	margin-left: 31.2%;
+}
+
+#cb {
+	
+	margin-left: 54.5%;
+}
+
+
+#cb {
+	
+	 display: flex;
+	 margin-left: -5.6%;
+}
+
+
+#back {
+	
+	margin-left: 5.3%;
+	width: 70px;
+	height: 30px;
+	font-family: "G마켓 산스";
+	padding-top: 0.7%;
+	font-size: 13px;
+}
+
+#modify {
+	margin-left: 195%;
+	width: 70px;
+	height: 30px;
+	font-family: "G마켓 산스";
+	padding-top: 10%;
+	font-size: 13px;
+	background-color: #f76300;
+	border: #f76300;
+}
+
+#delete {
+	margin-left: 200%;
+	width: 70px;
+	height: 30px;
+	font-family: "G마켓 산스";
+	padding-top: 10%;
+	font-size: 13px;
+	background-color: #a4c639;
+	border: #a4c639;
+}
+
+#kakao-link-btn {
+	margin-left: 81.2%;
+	margin-bottom: 7%;
+	width: 70px;
+	height: 30px;
+	font-family: "G마켓 산스";
+	padding-top: 1%;
+	font-size: 13px;
+		
+}
+
+ #profile_img{
+         width:130px;
+          height:170px;
+          object-fit: cover;
+    }

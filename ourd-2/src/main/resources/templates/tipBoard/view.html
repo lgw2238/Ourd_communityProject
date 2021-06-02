@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="board/fragments/header :: main-head"> </head>
+	<body th:replace="board/fragments/body :: main-body"> </body>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="TemplateMo">
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
+
+<title>Ourd Business - Services</title>
+
+<!-- Bootstrap core CSS -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="../assets/css/fontawesome.css">
+<link rel="stylesheet" href="../assets/css/templatemo-finance-business.css">
+<link rel="stylesheet" href="../assets/css/owl.css">
+<link rel="stylesheet" href="../assets/css/tipview.css">
+<!--
+
+Finance Business TemplateMo
+
+https://templatemo.com/tm-545-finance-business
+
+-->
+</head>
+
+<body>
+
+	<!-- ***** Preloader Start ***** -->
+	<div id="preloader">
+		<div class="jumper">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<!-- ***** Preloader End ***** -->
+
+  <!-- Header -->
+
+    
+     <header class="">
+      <nav class="navbar navbar-expand-lg">
+         <div class="container">
+            <a class="navbar-brand" href="/home"><h2>OURD
+                  Business</h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+               data-target="#navbarResponsive" aria-controls="navbarResponsive"
+               aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active"><a class="nav-link" href="/home">Home
+                        <span class="sr-only">(current)</span>
+                  </a></li>
+                  <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link"
+                   th:href="@{login}">Sign Up</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/board/list.do">Board
+                        </a></li>
+                     <li class="nav-item"><a class="nav-link" href="/chat/room" 
+                  onclick="window.open(this.href, '_blank', 'width=460px,height=420px,left=2000%, top=500px,toolbars=no,scrollbars=no'); return false;">
+                        Chat</a></li>
+                    
+                  <li class="nav-item"><a class="nav-link" href="/home" sec:authorize="isAuthenticated()" sec:authentication="name"></a></li>
+                    <form class="nav-item" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
+                  <li class="nav-item"><a class="nav-link" href="board" th:href="@{'/logout'}">
+                        <button class="btn btn-outline-success" type="submit">logout</button></a></li>
+                  </form>
+               </ul>
+            </div>
+         </div>
+      </nav>
+   </header>
+   
+
+	<!-- Page Content -->
+	<div class="page-heading header-text">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>>TIP BOARD</h1>
+					<span>WITH. OURD</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="back1">
+    
+<br>
+	<div class="title1">TIP WRITE <p th:if="${nickname != null}"><a href="javascript:;" id="kakao-link-btn" class="btn btn-warning waves-effect waves-light" >공유하기</a> </p></div>
+<br>
+
+	<th:block layout:fragment="title">
+		<title>this is view page</title>
+	</th:block>
+
+
+	<th:block layout:fragment="content">
+		<div class="card-content">
+			<form class="form-horizontal form-view" th:object="${board}" id="middle">
+			<br>
+				<div class="form-group">
+					<label for="inp-type-1" class="col-sm-2 control-label" id="l1">제목</label>
+					<div class="col-sm-5" id="l2">
+						<p class="form-control" th:text="*{title}" id="l2"></p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inp-type-2" class="col-sm-2 control-label" id="l1">이름</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{writer}" id="l4"></p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inp-type-2" class="col-sm-2 control-label" id="l1">내용</label>
+					<div class="col-sm-5">
+						<p class="form-control" th:text="*{content}" id="l3"></p>
+					</div>
+				</div>						
+
+			</form>
+
+   <div class="btn_wrap text-center" th:object="${params}" id="cb">
+   		<div class="back2">
+            <a th:href="|@{/tipBoard/list.do}*{makeQueryString(currentPageNo)}|"
+               class="btn btn-default waves-effect waves-light" id="back" >뒤로가기</a>
+   		</div>
+            <p th:if="${nickname} == ${board.username}">
+               <a
+                  th:href="|@{/tipBoard/write.do}*{makeQueryString(currentPageNo)}&idx=${board.idx}|"
+                  class="btn btn-primary waves-effect waves-light" id="modify">수정하기</a>
+            </p>
+            <p th:if="${nickname != null}"></p>
+	
+            <p th:if="${nickname} == ${board.username}"><button type="button"
+                  class="btn btn-danger waves-effect waves-light"
+                  th:onclick="deleteBoard([[ ${board.idx} ]], [[ *{makeQueryString(currentPageNo)} ]])" id="delete">삭제하기</button>
+            </p>
+            <p th:if="${nickname != null}"></p>
+			
+         </div>
+<br><br><br><br><br><br><br><br><br>
+		</div>
+		<!-- /.card-content -->
+	</th:block>
+	<th:block layout:fragment="add-content">
+
+		<!-- /.box-content -->
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			$(function() {
+				printCommentList();
+			});
+
+			function openModal(idx, writer, content) {
+
+				$("#commentModal").modal("toggle");
+
+				document.getElementById("modalWriter").value = writer;
+				document.getElementById("modalContent").value = content;
+
+				document.getElementById("btnCommentUpdate").setAttribute("onclick", "updateComment("+ idx +")");
+				document.getElementById("btnCommentDelete").setAttribute("onclick", "deleteComment("+ idx +")");
+			}
+
+			function insertComment(boardIdx) {
+
+				var content = document.getElementById("content");
+				if (isEmpty(content.value) == true) {
+					content.setAttribute("placeholder", "댓글을 입력해 주세요.");
+					content.focus();
+					return false;
+				}
+
+				var uri = /*[[ @{/comments} ]]*/;
+				var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+				var params = {"boardIdx": boardIdx, "content": content.value, "writer": "관리자"};
+
+				$.ajax({
+					url: uri,
+					type: "POST",
+					headers: headers,
+					dataType: "json",
+					data: JSON.stringify(params),
+					success: function(response) {
+						if (response.result == false) {
+							alert("댓글 등록에 실패하였습니다.");
+							return false;
+						}
+
+						printCommentList();
+						content.value = "";
+					},
+					error: function(xhr, status, error) {
+						alert("에러가 발생하였습니다.");
+						return false;
+					}
+				});
+			}
+			/*[- end of function -]*/
+
+			function updateComment(idx) {
+
+				var writer = document.getElementById("modalWriter");
+				var content = document.getElementById("modalContent");
+			
+				var uri = [[ @{/comments/} ]] + idx;
+				var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+				var params = {"idx": idx, "writer": writer.value, "content": content.value};
+			
+				$.ajax({
+					url: uri,
+					type: "PATCH",
+					headers: headers,
+					dataType: "json",
+					data: JSON.stringify(params),
+					success: function(response) {
+						if (response.result == false) {
+							alert("댓글 수정에 실패하였습니다.");
+							return false;
+						}
+			
+						printCommentList();
+						$("#commentModal").modal("hide");
+					},
+					error: function(xhr, status, error) {
+						alert("에러가 발생하였습니다.");
+						return false;
+					}
+				});
+			}
+			/*[- end of function -]*/
+
+			function deleteComment(idx) {
+
+				if (!confirm('댓글을 삭제하시겠어요?')) {
+					return false;
+				}
+			
+				var uri = [[ @{/comments/} ]] + idx;
+				var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+			
+				$.ajax({
+					url: uri,
+					type: "DELETE",
+					headers: headers,
+					dataType: "json",
+					success: function(response) {
+						if (response.result == false) {
+							alert("댓글 삭제에 실패하였습니다.");
+							return false;
+						}
+			
+						printCommentList();
+						$("#commentModal").modal("hide");
+					},
+					error: function(xhr, status, error) {
+						alert("에러가 발생하였습니다.");
+						return false;
+					}
+				});
+			}
+
+			function printCommentList() {
+
+				var uri = /*[[ @{/comments/} + ${board.idx} ]]*/;
+
+				$.get(uri, function(response) {
+					if (isEmpty(response) == false) {
+						var commentsHtml = "";
+
+						$(response.commentList).each(function(idx, comment) {
+							commentsHtml += `
+								<li>
+									<span class="name">${comment.writer}</span>
+									<span class="desc">${comment.content}</span>
+									<span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+									<button type="button" onclick="openModal(${comment.idx}, '${comment.writer}', '${comment.content}' )" class="btn btn-xs btn-circle"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
+								</li>
+							`;
+						});
+
+						$(".notice-list").html(commentsHtml);
+					}
+				}, "json");
+			}
+			/*[- end of function -]*/
+
+			function deleteBoard(idx, queryString) {
+
+				if (confirm(idx + "번 게시글을 삭제할까요?")) {
+					var uri = /*[[ @{/tipBoard/delete.do} ]]*/;
+					var html = "";
+
+					html += '<form name="dataForm" action="'+uri+'" method="post">';
+					html += '<input type="hidden" name="idx" value="'+idx+'" />';
+
+					/*[- 쿼리 스트링을 오브젝트 형태로 변환 -]*/
+					queryString = new URLSearchParams(queryString);
+					queryString.forEach(function(value, key) {
+						if (isEmpty(value) == false) {
+							html += '<input type="hidden" name="' + key + '" value="' + value + '" />';
+						}
+					});
+
+					html += '</form>';
+
+					$("body").append(html);
+					document.dataForm.submit();
+				}
+			}
+			/*[- end of function -]*/
+
+			/*]]>*/
+		</script>
+	</th:block>
+  <!-- Footer Starts Here -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 footer-item">
+					<h4>OurD 소개</h4>
+					<p><strong>Our Dream</strong>
+					<br>
+						우리들의 꿈이 이루어지는  <br>
+						그날까지 함께하겠습니다. <br>
+						We will be together until our dreams come true.<br>
+						ABOUT OurD</p>
+						<!-- 
+					<ul class="social-icons">
+						<li><a rel="nofollow" href="https://fb.com/templatemo"
+							target="_blank"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance"></i></a></li>
+					</ul>
+					 -->
+				</div>
+				<div class="col-md-3 footer-item">
+					<h4>고객 센터</h4> 
+						<p>
+						(주)Our Dream | 서울 강남구 테헤란로 <br>
+						고객센터 전화문의 | 010-0000-0000 <br>
+						FAX | 02-0000-0000  <br>
+						E-mail ourD@naver.com <br>
+						</p>
+				</div>
+				<div class="col-md-3 footer-item">
+					<h4>Additional Pages</h4>
+					<ul class="menu-list">
+						<li><a href="#">About Us 회사소개 바로가기</a></li>
+						<li><a href="#">포트폴리오 등록하는 곳 바로가기</a></li>
+						<li><a href="#">팁 게시판 바로가기</a></li>
+						<li><a href="#">~ 바로가기</a></li>
+						<li><a href="#">~ 바로가기</a></li>
+					</ul>
+				</div>
+
+
+				<!-- 채팅방 자바스크립트 -->
+				
+				<script type="text/javascript">
+					$(function(){
+						
+						// 채팅방 바로가기
+						/*
+						$("#ChatGo").on('click', function(){
+							console.log('click');
+							window.open("/chat/room","room.html","width=400, height=300");
+						}); 
+						*/
+				</script>
+				
+
+				<div class="col-md-3 footer-item last-item">
+					<h4>채팅방 바로가기</h4>
+					<div class="contact-form">
+
+								<div class="col-lg-12">
+								<a href="/chat/room" onclick="window.open(this.href, '_blank', 'width=460px,height=420px,left=2000%, top=500px,toolbars=no,scrollbars=no'); return false;">
+								<!-- 
+									<a href="/chat/room" target='_blank'> -->
+										<fieldset>
+												<button value="채팅방으로이동" type="submit" id="ChatGo" class="filled-button">채팅방 바로가기</button>
+										</fieldset>
+									<!-- </a> -->
+								</a>
+								</div>
+							</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						Copyright &copy; Ourd Corp. All Right Reserved. <a rel="nofollow noopener" href="http://localhost:9091/login" target="_blank"></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/owl.js"></script>
+    <script src="../assets/js/slick.js"></script>
+    <script src="../assets/js/accordions.js"></script>
+
+    <script language = "text/Javascript"> 
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+  </body>
+</html>
